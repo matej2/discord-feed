@@ -1,4 +1,6 @@
 import os
+import time
+
 import praw
 import re
 
@@ -36,7 +38,12 @@ class Crossposter:
     def send_webhook(url, sub):
         webhook = DiscordWebhook(url=url)
         embed = DiscordEmbed(title=sub.title, description='r/DiscordFeed', color=242424)
-        embed.set_image(url=sub.url)
+        link = "www.reddit.com" + sub.permalink
+
+        embed.set_author(name='r/DiscordFeed', url='https://www.reddit.com/r/DiscordFeed/')
+        if sub.url is not None:
+            embed.set_image(url=sub.url)
+        embed.set_footer(text=f'Submitted to [r/DiscordFeed]({link}) by u/{sub.author}');
         webhook.add_embed(embed)
 
         return webhook.execute()
@@ -53,12 +60,8 @@ class Crossposter:
             if not submission.is_self and submission.link_flair_text != 'processed':
                 for wh in discord_webhooks:
                     self.send_webhook(wh, submission)
-
-                submission.reply(
-                    f'Submission {submission.title} successfully sent to Discord channels!'
-
-                    f'I am a bot, I read posts from r/DiscordFeed and send them to webhooks. Development is in progress. Please contact me if you want more info.'
-                )
                 self.set_flair(submission)
+
+                time.sleep(1)
 
         print(self.get_discord_subs())
