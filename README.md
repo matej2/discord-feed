@@ -1,7 +1,15 @@
 # discord-feed
 
-This will basically be a reddit to discord repost bot. First, a subreddit will be created. There would be pinned post with feed categories from which user could choose from. Then a bot will be added to this sub. User will first send a discord webhook link for a certain feed category, defined in pinned post.
+> Discord bot that you could use trought reddit
 
-Bot will read those links, test them and add them to database. Then user will repost submission to our sub. Bot will read this submission, and find feed category from post title / tag. Then, the bot will send this post to defined webhooks.
 
-Sub will have anti-flood bot that would prevent spam. It would also have admin post approval at first, and then we could instead use advanced keyword filters.
+Bot would have multiple subreddits grouped into feeds (categories). Each time bot would be called, it would choose random post from those feeds. It would also use filters when searching trough posts.
+
+User that wants to get those posts would subscribe to feeds. This will be done using webhooks. User would send a message to bot linking a certain webhook with feed. For example:
+
+    User: !update feed-pics <webhook-url>
+    Bot: Webhook for feed-pics is successfully saved
+
+Bot will read those messages and store webhooks in database. Next time the bot is ran, it will send posts to those webhooks. 
+
+Since this bot is meant to be content provider and not repost bot, it will be ran only a couple times per day, choosing the best posts from `/hot` page. On average, approx. 2-3 posts will be sent per day.
