@@ -1,9 +1,12 @@
 # discord-feed
 
-> Discord bot that you could use trought reddit
+> User subscriber to feeds (sub lists). Bot then sends one post from feed to webhook.
 
 
-Bot would have multiple subreddits grouped into feeds (categories). Each time bot would be called, it would choose random post from those feeds. It would also use filters when searching trough posts.
+Bot would have multiple subreddits grouped into feeds (categories). Each time bot would be called, it would choose random post from those feeds. It would also use filters when searching trough posts. Example:
+
+    Feed_list:
+      - feed-pics: pics, photos, nature
 
 User that wants to get those posts would subscribe to feeds. This will be done using webhooks. User would send a message to bot linking a certain webhook with feed. For example:
 
